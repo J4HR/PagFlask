@@ -1,0 +1,13 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+
+{%block body%}
+<h1>Usuarios</h1>
+{%for usuario in data.Users%}
+<ul>
+    <li>
+        <a href='http://{{data.host}}/perfil/{{ usuario }}'>{{ usuario  }}</a>
+    </li>
+</ul>
+{%endfor%}
+{%endblock %}

@@ -1,0 +1,43 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+{%block body%}
+<h1>{{data.bienvenida}}</h1>
+{%if data.log == "out" %}
+<a href='users/'>Perfiles...   |</a>
+<a href='myperfil/'>Mi Perfil...   |</a>
+<a href='NewPub/'>Nueva publicación... |</a>
+{%else%}
+<a href='NewUser/'>Crear cuenta...   |</a>
+{%endif%}
+<a href='log{{data.log}}/'>log{{data.log}}... |</a>
+{%if data.sizePub > 0 %}
+<h2>Publicaciones Recientes</h2>
+{%for publicacion in publicaciones %}
+<hr>
+    {%if data.log == "out" %}
+    <a href='perfil/{{ publicaciones.get(publicacion)[0] }}'>
+        {{publicaciones.get(publicacion)[0]}}
+    </a>
+    {%endif%}
+    <ul>
+        {{ publicaciones.get(publicacion)[1] }}   
+    </ul>
+    
+    <form>
+        {%if data.log == "out" %}
+        <a href="{{data.url}}?OP=like&ID={{ publicacion }}">
+            <input type = "button" value="Like: ({{ publicaciones.get(publicacion)[2] }})">
+        </a>
+        {%endif%}
+        <a href='{{data.url}}?ID={{ publicacion }}'>Comentarios...   |</a> 
+    </form>
+    
+    
+</hr>
+{%endfor%}
+{%else%}
+<hr>
+<h2>no hay publicaciones...</h2>
+</hr>
+{%endif%}
+{%endblock %}

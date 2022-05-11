@@ -1,0 +1,13 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+
+{%block body%}
+<h1>Entrar</h1>
+<form action='' method = "POST">
+    <p>Nombre: <input type = "text" name= "name" /></p>
+    <p>Contraseña: <input type = "text" name= "pass" /></p>
+    <input type = "submit" value = "Cancelar" formmethod="LINK"formaction="{{data.host}}" />
+    <input type = "hidden" name="csrf_token" value = "{{csrf_token()}}"/>
+    <input type = "submit" value = "Aceptar"/>
+</form>
+{%endblock %}

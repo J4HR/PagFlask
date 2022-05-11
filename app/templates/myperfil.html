@@ -1,0 +1,93 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+{%block body%}
+
+<h1>{{data.nombre}}</h1>
+
+{%for nameButton in buttons%}
+<a href="{{buttons.get(nameButton)}}">
+    <input type = "button" value="{{nameButton}}">    
+</a>
+{%endfor%}
+<h2>Publicaciones</h2>
+{%if data.sizePub > 0 %}
+
+{%for pos in range(data.sizePub) %}
+<hr>
+<form method="LINK" action = "http://127.0.0.1:5000">
+    <p>
+        <input type = "submit" value = "Editar"formaction="/edit/pub/{{pos}}">
+        <input type = "submit" value = "Eliminar"formaction="/del/pub/{{pos}}">
+    </p>
+</form>
+<ul>
+    <p>
+        {{ data.userPub[pos] }}   
+    </p>
+    Like: ({{ data.pubLikes[pos] }}) | Comentarios...
+</ul>
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no ha publicado...</h3>
+
+{%endif%}
+
+
+<h2>Publicaciones Gustos</h2>
+{%if data.sizelike > 0 %}
+
+{%for pos in range(data.sizelike) %}
+<hr>
+    <p>
+        {{ data.userLikes[pos] }}   
+    </p>
+    <form>
+        <a href="http://127.0.0.1:5000/pub?OP=like&PubPos={{pos}}&Return=myperfil">
+            <input type = "button" value="Like: ({{ data.likepublikes[pos] }})">
+        </a>
+    </form>
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no hay likes...</h3>
+
+{%endif%}
+
+
+<h2>Publicaciones Comentadas</h2>
+{%if data.sizeComent > 0 %}
+
+{%for publicacion in range(data.sizeComent) %}
+<hr>
+    <p>
+        {{ data.pubComent[publicacion] }}   
+    </p>
+    Comentarios...
+    {%for ncomentario in range(data.sizeComents[publicacion])%}
+    <li>
+        {{data.userComents[publicacion][ncomentario]}}
+        <ul>
+            <form method="LINK" action = "http://127.0.0.1:5000">
+                <p>
+                    <input type = "submit" value = "Editar" formaction="/edit/coment/{{publicacion}}{{ncomentario}}" />
+                    <input type = "submit" value = "Eliminar" formaction="/del/coment/{{publicacion}}{{ncomentario}}" />
+                </p>
+            </form>
+        </ul>
+    </li>
+    {%endfor%}
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no hay Comentarios...</h3>
+
+{%endif%}
+
+{%endblock %}

@@ -1,0 +1,41 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+
+{%block body%}
+
+{%if data.userlog%}
+<h1><a href='http://{{data.host}}/perfil/{{ data.Owner }}'>{{ data.Owner }}</a></h1>
+{%endif%}
+<hr>
+<center><p5>{{ data.contenido }}</p5></center>
+{%if data.userlog%}
+<form>
+    <a href="http://{{data.host}}/pub?OP=like&ID={{data.pubID}}">
+        <input type = "button" value="Like: ({{ data.likes }})">
+    </a>
+    
+</form>
+<hr>
+<form action='' method = "POST">
+    <p>Comentario <input type = "text" name = "Comentario" />
+    <input type = "submit" value = "Publicar" /></p>
+</form>
+
+{%else%}
+<span>Like: ({{ data.likes }})</span>
+<hr>
+<center><h3>({{data.sizeComents }})  comentarios: </h3></center>
+{%endif%}
+
+{%for pos in range(data.sizeComents) %}
+<ul>
+    {%if data.userlog%}
+    <h4><a href='http://{{data.host}}/perfil/{{ data.Owners[pos]}}'>{{ data.Owners[pos] }} :</a></h4>
+    {%endif%}
+    <li>
+        {{ data.comentarios[pos] }}   
+    </li>
+</ul>
+{%endfor%}
+
+{%endblock %}

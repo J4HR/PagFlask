@@ -1,0 +1,18 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+
+{%block body%}
+<h1>{{data.msn}}</h1>
+<form action='' method = "POST">
+    {%if data.element=="pass"%}
+    <p>Confirma tu contraseña:<input type = "text" name= "pass" /></p>
+    <p>Nueva contraseña:
+    {%else%}
+    <p>Nuevo {{data.element}}:
+    {%endif%}
+    <input type = "text" name= "nuevo_Elemento" /></p>
+    <input type = "submit" value = "Cancelar" formmethod="LINK"formaction="http://127.0.0.1:5000/myperfil/" />
+    <input type = "hidden" name="csrf_token" value = "{{csrf_token()}}"/>
+    <input type = "submit" value = "Continuar"/>
+</form>
+{%endblock %}

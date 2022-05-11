@@ -1,0 +1,66 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+{%block body%}
+<h1>{{data.nombre}}</h1>
+
+
+<h2>Publicaciones</h2>
+{%if data.sizePub > 0 %}
+
+{%for pos in range(data.sizePub) %}
+<hr>
+    <p>
+        {{ data.userPub[pos] }}   
+    </p>
+    Like: ({{ data.pubLikes[pos] }}) | Comentarios...
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no ha publicado...</h3>
+
+{%endif%}
+
+
+<h2>Publicaciones Gustos</h2>
+{%if data.sizelike > 0 %}
+
+{%for pos in range(data.sizelike) %}
+<hr>
+    <p>
+        {{ data.userLikes[pos] }}   
+    </p>
+    Ver...
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no hay likes...</h3>
+
+{%endif%}
+
+
+<h2>Publicaciones Comentadas</h2>
+{%if data.sizeComent > 0 %}
+
+{%for publicacion in range(data.sizeComent) %}
+<hr>
+    <p>
+        {{ data.pubComent[publicacion] }}   
+    </p>
+    Comentarios...
+    {%for comentario in data.userComents[publicacion] %}
+    <li>{{comentario}}</li>
+    {%endfor%}
+</hr>
+{%endfor%}
+
+{%else%}
+
+<h3>no hay likes...</h3>
+
+{%endif%}
+
+{%endblock %}

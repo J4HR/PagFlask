@@ -1,0 +1,13 @@
+{%extends './layout.html'%}
+{%block title%}{{data.titulo}}{%endblock %}
+
+{%block body%}
+<h1>Ingresa tus datos:</h1>
+<form action='' method = "POST">
+    <p>name <input type = "text" name = "name" /></p>
+    <p>gmail <input type = "text" name = "gmail" /></p>
+    <p>"password" <input type = "text" name = "password" /></p>
+    <input type = "hidden" name="csrf_token" value = "{{csrf_token()}}"/>
+    <p><input type = "submit" value = "Crear" /></p>
+</form>
+{%endblock %}
